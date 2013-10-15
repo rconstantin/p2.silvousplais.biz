@@ -1,0 +1,122 @@
+@font-face {
+  font-family: 'AmalgamationRegular';
+  src: url('amalgamation-webfont.eot');
+  src: local('☺'), url('amalgamation-webfont.woff') format('woff'), url('amalgamation-webfont.ttf') format('truetype'), url('amalgamation-webfont.svg#webfontzoHIG0YU') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* || making the HTML5 structural elements behave in most non-supporting browsers */
+
+article, section, aside, hgroup, nav, header, footer, figure, figcaption {
+  display: block;
+}
+
+/* || resets and general rules */
+
+html {
+  font-family: helvetica, arial, 'sans serif';
+}
+
+body {
+  margin: 0;
+  padding: 0;
+/*  background-image: url(); */
+}
+
+/*  ||  headings */
+
+h1, h2, h3 {
+  font-family: 'AmalgamationRegular';
+  color: rgb(200,0,0);
+  text-shadow: 3px 3px 5px #000000;
+}
+
+#tagline {
+  font-size: 0.9em;
+}
+
+/* || overall positioning and navigation */
+
+#wrapper {
+  width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* || table styling */
+
+table {
+  width: 80%;
+  background-color: #cccccc;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.main_table_head {
+  background-color: #888888;
+}
+
+/* || styling the document parts */
+
+section, aside {
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(125,125,255);
+}
+
+header {
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 0 10px 10px 10px;
+  margin: 10px;
+  background-color: rgb(100,100,255);
+}
+
+footer {
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(100,100,255);
+  font-size: 0.7em;
+}
+
+nav {
+  background-color: white;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  border: 3px dashed black;
+}
+
+figure {
+  padding: 20px;
+  background-color: white;
+  margin: 0 auto;
+  width: 68%;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  -o-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -webkit-transform: rotate(2deg);
+  transform: rotate(2deg);
+  box-shadow: black 5px 5px 5px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;  
+}
+
+figcaption {
+  text-align: center;
+}
+
+div.menu-bar li:hover > ul {
+  display: block;
+}
