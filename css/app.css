@@ -6,13 +6,6 @@
   font-style: normal;
 }
 
-
-/* || making the HTML5 structural elements behave in most non-supporting browsers */
-
-article, section, aside, hgroup, nav, header, footer, figure, figcaption {
-  display: block;
-}
-
 /* || resets and general rules */
 
 html {
@@ -20,8 +13,8 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  margin: 1em;
+  padding: 1em;
 /*  background-image: url(); */
 }
 
@@ -31,6 +24,18 @@ h1, h2, h3 {
   font-family: 'AmalgamationRegular';
   color: rgb(200,0,0);
   text-shadow: 3px 3px 5px #000000;
+  font-style: italic;
+}
+p {
+  font-family: 'AmalgamationRegular';
+  color: rgb(200,0,0);
+  text-shadow: 1px 1px 1px #000000;
+}
+
+p1 {
+  font-family: 'AmalgamationRegular';
+  color: green;
+  text-shadow: 1px 1px 1px #000000;
 }
 
 #tagline {
@@ -68,12 +73,50 @@ section, aside {
   background-color: rgb(125,125,255);
 }
 
+.error {color: #FF0000;}
+
+#nav {
+    width: 100%;
+    float: left;
+    margin: 0 0 3em 0;
+    padding: 0;
+    list-style: none;
+}
+#nav li {
+    position:relative;
+    float: left; 
+}
+#nav li a {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+    border-right: 1px solid #ccc; 
+    cursor:pointer;
+    background:rgba(255, 255, 255, .8);
+    text-align:center;
+    border-radius:.75em;
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
+    transition-property: background, color, padding, border-radius;
+    box-shadow:
+        .1em -.1em 0 .1em rgba(0, 0, 0, .2),
+        inset 0 0 0 .15em rgba(0, 0, 0, .4),
+        -.1em .1em 0 .1em rgba(0, 0, 0, .2)
+}
+#nav li a:hover {
+    color: #c00;
+    background-color:rgba(251, 93, 0, .8);
+    padding: 0.5em;
+}
+
 header {
   -moz-border-radius: 20px;
   border-radius: 20px;
   padding: 0 10px 10px 10px;
   margin: 10px;
-  background-color: rgb(100,100,255);
+  background-color: rgb(100,100,55);
 }
 
 footer {
@@ -83,15 +126,6 @@ footer {
   margin: 10px;
   background-color: rgb(100,100,255);
   font-size: 0.7em;
-}
-
-nav {
-  background-color: white;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px;
-  border: 3px dashed black;
 }
 
 figure {
@@ -107,7 +141,15 @@ figure {
   transform: rotate(2deg);
   box-shadow: black 5px 5px 5px;
 }
-
+.floatright
+{
+float: right;
+margin: 0 0 10px 10px;
+border: 1px solid #666;
+border-radius:10px;
+padding: 2px;
+}
+/*
 img {
   display: block;
   margin: 0 auto;  
@@ -120,3 +162,4 @@ figcaption {
 div.menu-bar li:hover > ul {
   display: block;
 }
+*/

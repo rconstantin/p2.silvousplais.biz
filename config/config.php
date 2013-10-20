@@ -14,7 +14,7 @@ If you want a different default time format for this app, set it below
 */
 
 # What is the name of this app?
-	define('APP_NAME', 'Hipster');  
+	define('APP_NAME', 'BusyTown');  
 
 # When email is sent out from the server, where should it come from?
 # Ideally, this should match the domain name
@@ -43,5 +43,5 @@ A email designated to receive messages from the server. Examples:
 	//define('SMTP_PASSWORD', '');
 
 # For extra security, you might want to set different salts than what the core uses
-	//define('PASSWORD_SALT', '');
-	//define('TOKEN_SALT', '');
+	define('PASSWORD_SALT', 'snfngfjgfokffgjkfgjkfwqa');
+	define('TOKEN_SALT', 'sdnngfjfgndfkfjgwfjfgjfl');

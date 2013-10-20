@@ -19,8 +19,17 @@ class index_controller extends base_controller {
 		$this->template->content = View::instance('v_index_index');
 			
 		# Now set the <title> tag
-		$this->template->title = "Hello World";
-	
+		$this->template->title = "Home of ".APP_NAME;
+        # add Menu if user already logged in (taking advantage of the global $this->user)
+        $this->template->hide_menu = FALSE;
+        $this->template->menu = View::instance('v_menu');
+       # if ($this->user) {       	
+       # 	$this->template->menu = View::instance('v_menu1');
+		#}
+		#else {
+			# For new users present a friendlier signup (some incentive) or login option
+		#	$this->template->menu = View::instance('v_menu');
+		#}
 		# CSS/JS includes
 			/*
 			$client_files_head = Array("");
