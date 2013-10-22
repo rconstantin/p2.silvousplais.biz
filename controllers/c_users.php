@@ -77,10 +77,8 @@ class users_controller extends base_controller {
             $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
             # create an encripted Token based on the email address and a random string
             $_POST['token'] = sha1(TOKEN_SALT.$_POST['email']).Utils::generate_random_string();
+            # insert row into DB
             $user_id = DB::instance(DB_NAME)->insert('users', $_POST);
-
-            # TBD make a proper View for this or redirect to signin page
-            #echo 'Congratulation ' . $_POST['first_name'].'! You are signed up to ' . APP_NAME;
 
             # redirect to anchor page
             Router::redirect("/users/login");
