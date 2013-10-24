@@ -21,15 +21,17 @@
                 A day in the life of the amazing BusyTown enhabitants </h1>
             <h2 id="tagline" > Come Join Huckle, Lowly and Sally to name a few </h2>
         </header>
-        <?php if(isset($hide_menu) AND !$hide_menu): ?>
-            <div id='menu'>
-                <?=$menu;?>
-            </div>
-        <?php endif; ?>
+        <aside>
+            <?php if(isset($hide_menu) AND !$hide_menu): ?>
+                <div id='menu'>
+                    <?=$menu;?>
+                </div>
+            <?php endif; ?>
 
-	   <?php if(isset($content)) echo $content; ?>
+	       <?php if(isset($content)) echo $content; ?>
 
-	   <?php if(isset($client_files_body)) echo $client_files_body; ?>
+	       <?php if(isset($client_files_body)) echo $client_files_body; ?>
+        </aside>
     </div>       
 </body>
 </html>

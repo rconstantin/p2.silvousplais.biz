@@ -1,7 +1,5 @@
 @font-face {
   font-family: 'AmalgamationRegular';
-  src: url('amalgamation-webfont.eot');
-  src: local('☺'), url('amalgamation-webfont.woff') format('woff'), url('amalgamation-webfont.ttf') format('truetype'), url('amalgamation-webfont.svg#webfontzoHIG0YU') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,10 +13,25 @@ html {
 body {
   margin: 1em;
   padding: 1em;
-/*  background-image: url(); */
+  background-image: url(/uploads/avatars/busytown5.jpeg); 
 }
 
 /*  ||  headings */
+header {
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 1px 10px 10px 10px;
+  margin: 10px;
+  background-color: rgb(200,200,10);
+}
+
+aside {
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(200,200,10);
+}
 
 h1, h2, h3 {
   font-family: 'AmalgamationRegular';
@@ -40,6 +53,18 @@ p1 {
 
 #tagline {
   font-size: 0.9em;
+}
+
+/* Setting text area size and style */
+textarea#styled {
+  width: 600px;
+  height: 120px;
+  border: 3px solid #cccccc;
+  padding: 5px;
+  font-family: Tahoma, sans-serif;
+  background-image: url(bg.gif);
+  background-position: bottom right;
+  background-repeat: no-repeat;
 }
 
 /* || overall positioning and navigation */
@@ -64,14 +89,6 @@ table {
 }
 
 /* || styling the document parts */
-
-section, aside {
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px;
-  background-color: rgb(125,125,255);
-}
 
 .error {color: #FF0000;}
 
@@ -111,14 +128,6 @@ section, aside {
     padding: 0.5em;
 }
 
-header {
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  padding: 0 10px 10px 10px;
-  margin: 10px;
-  background-color: rgb(200,200,10);
-}
-
 footer {
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -149,17 +158,3 @@ border: 1px solid #666;
 border-radius:10px;
 padding: 2px;
 }
-/*
-img {
-  display: block;
-  margin: 0 auto;  
-}
-
-figcaption {
-  text-align: center;
-}
-
-div.menu-bar li:hover > ul {
-  display: block;
-}
-*/

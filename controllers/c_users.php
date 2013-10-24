@@ -1,4 +1,14 @@
 <?php
+# Could move this function to common library but since it is users input specific will keep it
+# here for now
+
+function test_input($data) {
+  $data = trim($data);
+  $data = htmlspecialchars($data);
+  $data = stripslashes($data);
+  return $data;
+}
+
 class users_controller extends base_controller {
 
     public function __construct() {
@@ -29,18 +39,35 @@ class users_controller extends base_controller {
         # for simplicity of logic and to use single error code - set
         # error to first missing field.
         $error = '';
-        if (empty($_POST['first_name'])) {
+        if (empty($_POST['first_name'])) 
+        {
             $error = 'InvalidFirstName';
         }
-        elseif (empty($_POST['last_name'])) {
+        else {
+            $_POST['first_name'] = test_input($_POST['first_name']);
+        }
+        if (empty($_POST['last_name'])) {
             $error = 'InvalidLastName';
         }
-        elseif (empty($_POST['email'])) {
+        else {
+            $_POST['last_name'] = test_input($_POST['last_name']);
+        }
+        if (empty($_POST['email'])) {
             $error = 'InvalidEmail';
         }
-        elseif (empty($_POST['password'])) {
+        else {
+            $_POST['email'] = test_input($_POST['email']);
+            if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$_POST['email']))
+            {
+                $error = "InvalidEmail";
+                $_POST['email'] = '';
+            }
+
+        }
+        if (empty($_POST['password'])) {
             $error = 'InvalidPassword';
         }
+      
         # DB Validation that new user email is not already in use
         if (!$error) {
            # NEED NEW API to return count...  
@@ -54,17 +81,14 @@ class users_controller extends base_controller {
                 $error = 'InvalidEmail';
             }
         }
+        
         # Insert this user into the database - More error checking to follow
    
         if ($error != '') {
             $lastName = $_POST['last_name'];
             $firstName = $_POST['first_name'];
-            if ($error != 'InvalidEmail') {
-                $email = $_POST['email'];
-            }
-            else {
-                $email = '';
-            }
+            $email = $_POST['email'];
+       
             # send back to signup page
             Router::redirect("/users/signup/$firstName/$lastName/$email/$error");
         }
@@ -115,7 +139,7 @@ class users_controller extends base_controller {
             else {
                 $email = '';
             }
-            # send back to login page
+            # send back to login page, return email and error
             Router::redirect("/users/login/$email/$error");
         }
         # Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
