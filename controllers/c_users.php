@@ -16,7 +16,8 @@ class users_controller extends base_controller {
     } 
 
     public function index() {
-        echo "This is the index page";
+        # redirect to main page
+        Router::redirect("/");
     }
 
     public function signup($firstName = NULL, $lastName = NULL, $email = NULL, $error = NULL) {
@@ -27,9 +28,13 @@ class users_controller extends base_controller {
         $this->template->content->lastName = $lastName;
         $this->template->content->email = $email;
         $this->template->title = "Sign Up to " . APP_NAME;
+        #load JS 
+        $client_files_head = Array("/js/jquery-2.0.0.js", "/js/jstz-1.0.4.min.js");
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
         # add Menu
         $this->template->hide_menu = FALSE;
         $this->template->menu = View::instance('v_menu');
+
         # Render template
         echo $this->template;
     }
@@ -123,15 +128,17 @@ class users_controller extends base_controller {
 
     public function p_login()
     {
+        
         $error = '';
+
         # Validate input parameter
         if (empty($_POST['email'])) {
             $error = 'InvalidEmail';
         }
-        elseif (empty($_POST['password'])) {
+        if (empty($_POST['password'])) {
             $error = 'InvalidPassword';
         }
-        if ($error != "")
+        if ($error!= '')
         {
             if ($error != 'InvalidEmail') {
                 $email = $_POST['email'];
@@ -207,10 +214,9 @@ class users_controller extends base_controller {
         }
         # Create a View Instance and assign to template content
         $this->template->content = View::instance('v_users_profile');
-
+      
         # Pass information to the view specific content
-        $this->template->content->time = Time::display(Time::now());
-        $this->template->title = "Profile of".$this->user->first_name;
+        $this->template->title = "Profile of ".$this->user->first_name;
 
         # add Menu
         $this->template->hide_menu = FALSE;
@@ -218,6 +224,20 @@ class users_controller extends base_controller {
 
         # Render View
         echo $this->template;
+    }
+    public function p_profile() {
+        # first upload file to /uploads/avatars
+        $this->user->avatarUrl = Upload::upload($_FILES,"/uploads/avatars/",
+                                array("jpg", "jpeg", "gif", "png", "avi", 
+                                "JPG", "JPEG", "GIF", "PNG", "AVI"), $this->user->user_id);
+        # update avatarUrl in the database
+        $data = Array("avatarUrl"=>$this->user->avatarUrl);
+        $where_clause = "WHERE user_id = '".$this->user->user_id."'";
+        DB::instance(DB_NAME)->update("users", $data, $where_clause);
+ 
+        # Send them back to the main index.
+        Router::redirect("/");
+
     }
 } # end of the class
 ?>

@@ -24,8 +24,9 @@
     <br><br>
 
     <input style='display:none;' type='hidden' id ='timezone' name='timezone'> 
-    <script src="/js/jstz-1.0.4.min.js">
-        $("input[name='timezone']").val('jstz.determine().name()'); // Still not working with chrome
+    <script>
+        $tzone = jstz.determine().name();
+        $("input[name='timezone']").val($tzone); 
     </script>
 
     <input type='submit' style="background-color: green; color: #ffffff;">
