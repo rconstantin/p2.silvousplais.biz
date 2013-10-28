@@ -9,11 +9,11 @@
 <p> Upload/Change your Personal Avatar<p> 
 
 <?php if ($user->avatarUrl) : ?>
-    <img class="circular" src="/uploads/avatars/<?=$user->avatarUrl?>" alt="" width="80" height="80">
+    <img class="circular" src="/uploads/avatars/<?=$user->avatarUrl?>" 
+                alt="" width="80" height="80">
 <? endif; ?> 
 <form method='POST' action='/users/p_profile' enctype="multipart/form-data">
     <input type="file" name="file"> <br>
-
     <input type="submit" name="submit" 
            style="background-color: green; color: #ffffff;">
 </form>           

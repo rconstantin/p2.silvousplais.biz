@@ -45,7 +45,8 @@ class posts_controller extends base_controller {
         Router::redirect("/");
 
     }
-    
+    # function index() lists all the posts of members being followed
+    # it also list own posts.
     public function index() {
         # Set up the View
         $this->template->content = View::instance('v_posts_index');
@@ -55,6 +56,7 @@ class posts_controller extends base_controller {
         # being followed by logged in user
 
         $q = 'SELECT
+                posts.post_id,
                 posts.content,
                 posts.created,
                 posts.user_id AS post_user_id,
@@ -80,6 +82,8 @@ class posts_controller extends base_controller {
 
          echo $this->template;      
     }
+    # function users() lists all the users and displays connections to $user
+    # i.e where the members are followed or not by this $user
     public function users() {
         # Set up the View
         $this->template->content = View::instance("v_posts_users");
@@ -106,6 +110,7 @@ class posts_controller extends base_controller {
         echo $this->template;    
 
     }
+    # function follow() updates the DB to reflect desire to follow a user
     public function follow($user_id_followed) {
 
         # Prepare the data array to be inserted
@@ -130,6 +135,40 @@ class posts_controller extends base_controller {
         # send them back to /posts/users
 
         Router::redirect('/posts/users');
+    }
+    public function delete($post_id) {
+        # prepare where clause to delete post
+        $where_clause = 'WHERE post_id =' .$post_id;
+        # delete post from DB
+        DB::instance(DB_NAME)->delete('posts',$where_clause);
+        Router::redirect("/posts/index");
+    }
+    # display list of followers of this $user
+    public function followers() {
+        # Set up the View
+        $this->template->content = View::instance("v_posts_followers");
+        $this->template->title = "Followers";
+        # prepare statement to include followers info
+        $q = "SELECT 
+                users.first_name,
+                users.last_name,
+                users.timezone,
+                users.avatarUrl,
+                users_users.user_id AS follower_id,
+                users_users.created AS follower_since
+                FROM users
+                INNER JOIN users_users
+                ON users.user_id = users_users.user_id
+                WHERE users_users.user_id_followed = users.user_id";
+        $followers = DB::instance(DB_NAME)->select_array($q,'follower_id');
+        
+        # pass data to view
+        $this->template->content->followers = $followers;
+
+        # Render this view
+        echo $this->template;
+
+
     }
 }
 

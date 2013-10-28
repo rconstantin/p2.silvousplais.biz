@@ -39,6 +39,14 @@ h1, h2, h3 {
   text-shadow: 3px 3px 5px #000000;
   font-style: italic;
 }
+h4 {
+  font-family: 'AmalgamationRegular';
+  color: rgb(200,0,0);
+  text-shadow: 3px 3px 5px #000000;
+  font-style: italic;
+  text-align: center;
+}
+
 p {
   font-family: 'AmalgamationRegular';
   color: rgb(200,0,0);
@@ -51,6 +59,12 @@ p1 {
   text-shadow: 1px 1px 1px #000000;
 }
 
+p2 {
+  font-family: 'AmalgamationRegular';
+  color: green;
+  text-shadow: 1px 1px 1px #000000;
+  text-align: center;
+}
 #tagline {
   font-size: 0.9em;
 }
