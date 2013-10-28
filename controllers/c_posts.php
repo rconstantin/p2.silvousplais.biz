@@ -159,7 +159,8 @@ class posts_controller extends base_controller {
                 FROM users
                 INNER JOIN users_users
                 ON users.user_id = users_users.user_id
-                WHERE users_users.user_id_followed = users.user_id";
+                WHERE users_users.user_id_followed = ".$this->user->user_id;
+        print_r($q);       
         $followers = DB::instance(DB_NAME)->select_array($q,'follower_id');
         
         # pass data to view

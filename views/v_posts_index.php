@@ -6,7 +6,7 @@
     <!-- print owner name and display avatar at top of posts by owner. 
          No need for Avatar if owner is same as logged in user -->
     <?php if ($post['post_user_id'] != $prev_posts_user_id): ?>
-        <h3><?=$post['first_name']?> <?=$post['last_name']?> posted:</h3> 
+        <h3><?=$post['first_name']?> <?=$post['last_name']?> posted:</h3> <br>
         <?php if($post['avatarUrl'] AND $post['post_user_id'] != $user->user_id): ?>
             <img class="floatcircright" src="/uploads/avatars/<?=$post['avatarUrl']?>" alt="" width="100" height="100">
         <?php endif; ?>

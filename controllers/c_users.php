@@ -110,7 +110,10 @@ class users_controller extends base_controller {
             $user_id = DB::instance(DB_NAME)->insert('users', $_POST);
 
             # redirect to anchor page
-            Router::redirect("/users/login");
+            # Router::redirect("/");
+            # +Feature: redirect to profile page not requiring additional step to login
+            $this->p_common_login($_POST['token']);
+            Router::redirect("/users/profile");
         }
     }
     public function login($email = NULL, $error = NULL) {
@@ -171,19 +174,24 @@ class users_controller extends base_controller {
             Router::redirect("/users/login/$email/$error");
         }
         else {
-            # set cookie based on token with 1 year expiry and entire domain access priviliges
-            setcookie("token", $token, strtotime('+1 year'), '/');
-            # Update the DB field that indicates the last login time
-            $last_login = Time::now();
-            $data['last_login'] = $last_login;
-            $where_cond = "WHERE token = '".$token."'";
-            DB::instance(DB_NAME)->Update_row('users',$data, $where_cond);
-            # add Menu
-            $this->template->hide_menu = FALSE;
-            $this->template->menu = View::instance('v_menu');
+            $this->p_common_login($token);
             # Since we found a token, login successfull redirect to menu page
             Router::redirect("/");
         }
+    }
+    # common login processing funtion used in the login and signup process
+    public function p_common_login($token)
+    {
+        # set cookie based on token with 1 year expiry and entire domain access priviliges
+        setcookie("token", $token, strtotime('+1 year'), '/');
+        # Update the DB field that indicates the last login time
+        $last_login = Time::now();
+        $data['last_login'] = $last_login;
+        $where_cond = "WHERE token = '".$token."'";
+        DB::instance(DB_NAME)->Update_row('users',$data, $where_cond);
+        # add Menu
+        $this->template->hide_menu = FALSE;
+        $this->template->menu = View::instance('v_menu');
     }
 
     public function logout() {
