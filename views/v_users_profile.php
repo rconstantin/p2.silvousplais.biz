@@ -15,8 +15,7 @@
 <form method='POST' action='/users/p_profile' enctype="multipart/form-data">
     <span class="error"><?php if (isset($error)) {echo '* Invalid File Format: Please Enter a Valid file(.jpg, png, svg, etc).';}?> </span>
     <br>
-    <input type="file" name="file" style="width: 90px" 
-                        onchange="this.style.width = '100%';" />
+    <input type="file" name="file">
     <br> <br>                   
     <input type="submit" name="submit" 
            style="background-color: green; color: #ffffff;">
