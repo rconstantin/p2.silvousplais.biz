@@ -59,6 +59,7 @@ class posts_controller extends base_controller {
                 posts.post_id,
                 posts.content,
                 posts.created,
+                posts.modified,
                 posts.user_id AS post_user_id,
                 users_users.user_id AS follower_id,
                 users.first_name,
@@ -136,12 +137,39 @@ class posts_controller extends base_controller {
 
         Router::redirect('/posts/users');
     }
+    # Delete a post from posts table
     public function delete($post_id) {
         # prepare where clause to delete post
         $where_clause = 'WHERE post_id =' .$post_id;
         # delete post from DB
         DB::instance(DB_NAME)->delete('posts',$where_clause);
         Router::redirect("/posts/index");
+    }
+    # update text of a post
+    public function modify($post_id) {
+        # query statement
+        $q = 'SELECT content FROM posts WHERE post_id =' .$post_id;
+        # delete post from DB
+        $post_text = DB::instance(DB_NAME)->select_field($q);
+        # Setup view
+        $this->template->content = View::instance('v_posts_modify');
+        $this->template->title   = "Modify Post";
+        $this->template->content->post_text = $post_text;
+        $this->template->content->post_id = $post_id;
+        # Render template
+        echo $this->template;
+    }
+    public function p_modify($post_id) {
+        # build query statement
+        $data = Array (
+            "modified" => Time::now(),
+            "content" => $_POST['content']);
+        
+        $where_clause = "WHERE post_id=" .$post_id;
+        DB::instance(DB_NAME)->update_row('posts', $data, $where_clause);
+
+        # redirect to list of posts
+        Router::redirect('/posts/index');
     }
     # display list of followers of this $user
     public function followers() {
@@ -160,7 +188,7 @@ class posts_controller extends base_controller {
                 INNER JOIN users_users
                 ON users.user_id = users_users.user_id
                 WHERE users_users.user_id_followed = ".$this->user->user_id;
-        print_r($q);       
+      
         $followers = DB::instance(DB_NAME)->select_array($q,'follower_id');
         
         # pass data to view

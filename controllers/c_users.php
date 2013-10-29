@@ -213,7 +213,7 @@ class users_controller extends base_controller {
         Router::redirect("/");
     }
 
-    public function profile() 
+    public function profile($error = NULL) 
     {
         # use the global user to determine whether logged in or not
         if (!$this->user) {
@@ -222,6 +222,7 @@ class users_controller extends base_controller {
         }
         # Create a View Instance and assign to template content
         $this->template->content = View::instance('v_users_profile');
+        $this->template->content->error = $error;
       
         # Pass information to the view specific content
         $this->template->title = "Profile of ".$this->user->first_name;
@@ -235,14 +236,23 @@ class users_controller extends base_controller {
     }
     public function p_profile() {
         # first upload file to /uploads/avatars
-        $this->user->avatarUrl = Upload::upload($_FILES,"/uploads/avatars/",
+        
+        $avatarUrl = Upload::upload($_FILES,"/uploads/avatars/",
                                 array("jpg", "jpeg", "gif", "png", "avi", 
                                 "JPG", "JPEG", "GIF", "PNG", "AVI"), $this->user->user_id);
-        # update avatarUrl in the database
-        $data = Array("avatarUrl"=>$this->user->avatarUrl);
-        $where_clause = "WHERE user_id = '".$this->user->user_id."'";
-        DB::instance(DB_NAME)->update("users", $data, $where_clause);
- 
+        if ($avatarUrl != 'Invalid file type.')
+        {
+            $this->user->avatarUrl = $avatarUrl;
+  
+            # update avatarUrl in the database
+            $data = Array("avatarUrl"=>$this->user->avatarUrl);
+            $where_clause = "WHERE user_id = '".$this->user->user_id."'";
+            DB::instance(DB_NAME)->update("users", $data, $where_clause);
+        }
+        else {
+            $error = 'InvalidFileType';
+            Router::redirect("/users/profile/$error");
+        }
         # Send them back to the main index.
         Router::redirect("/");
 

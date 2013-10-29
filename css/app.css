@@ -1,105 +1,92 @@
 @font-face {
-  font-family: 'AmalgamationRegular';
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'AmalgamationRegular';
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* || resets and general rules */
 
 html {
-  font-family: helvetica, arial, 'sans serif';
+    font-family: helvetica, arial, 'sans serif';
 }
 
 body {
-  margin: 1em;
-  padding: 1em;
-  background-image: url(/uploads/avatars/busytown5.jpeg); 
+    margin: 1em;
+    padding: 1em;
+    background-image: url(/uploads/avatars/busytown5.jpeg); 
 }
 
 /*  ||  headings */
 header {
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  padding: 1px 10px 10px 10px;
-  margin: 10px;
-  background-color: rgb(200,200,10);
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding: 1px 10px 10px 10px;
+    margin: 10px;
+    background-color: rgb(200,200,10);
 }
 
 aside {
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px;
-  background-color: rgb(200,200,10);
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(200,200,10);
 }
 
 h1, h2, h3 {
-  font-family: 'AmalgamationRegular';
-  color: rgb(200,0,0);
-  text-shadow: 3px 3px 5px #000000;
-  font-style: italic;
+    font-family: 'AmalgamationRegular';
+    color: rgb(200,0,0);
+    text-shadow: 3px 3px 5px #000000;
+    font-style: italic;
 }
 h4 {
-  font-family: 'AmalgamationRegular';
-  color: rgb(200,0,0);
-  text-shadow: 3px 3px 5px #000000;
-  font-style: italic;
-  text-align: center;
+    font-family: 'AmalgamationRegular';
+    color: rgb(200,0,0);
+    text-shadow: 3px 3px 5px #000000;
+    font-style: italic;
+    text-align: center;
 }
 
 p {
-  font-family: 'AmalgamationRegular';
-  color: rgb(200,0,0);
-  text-shadow: 1px 1px 1px #000000;
+    font-family: 'AmalgamationRegular';
+    color: rgb(200,0,0);
+    text-shadow: 1px 1px 1px #000000;
 }
 
 p1 {
-  font-family: 'AmalgamationRegular';
-  color: green;
-  text-shadow: 1px 1px 1px #000000;
+    font-family: 'AmalgamationRegular';
+    color: green;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 p2 {
-  font-family: 'AmalgamationRegular';
-  color: green;
-  text-shadow: 1px 1px 1px #000000;
-  text-align: center;
+    font-family: 'AmalgamationRegular';
+    color: green;
+    text-shadow: 1px 1px 1px #000000;
+    text-align: center;
 }
 #tagline {
-  font-size: 0.9em;
+    font-size: 0.9em;
 }
 
 /* Setting text area size and style */
 textarea#styled {
-  width: 600px;
-  height: 120px;
-  border: 3px solid #cccccc;
-  padding: 5px;
-  font-family: Tahoma, sans-serif;
-  background-image: url(bg.gif);
-  background-position: bottom right;
-  background-repeat: no-repeat;
+    width: 600px;
+    height: 120px;
+    border: 3px solid #cccccc;
+    padding: 5px;
+    font-family: Tahoma, sans-serif;
+    background-image: url(bg.gif);
+    background-position: bottom right;
+    background-repeat: no-repeat;
 }
 
 /* || overall positioning and navigation */
 
 #wrapper {
-  width: 800px;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* || table styling */
-
-table {
-  width: 80%;
-  background-color: #cccccc;
-  margin: 0 auto;
-  border-collapse: collapse;
-}
-
-.main_table_head {
-  background-color: #888888;
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
 }
 
 /* || styling the document parts */
@@ -142,56 +129,54 @@ table {
     padding: 0.5em;
 }
 
-footer {
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px;
-  background-color: rgb(100,100,255);
-  font-size: 0.7em;
-}
-
-figure {
-  padding: 20px;
-  background-color: white;
-  margin: 0 auto;
-  width: 68%;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  -o-transform: rotate(2deg);
-  -moz-transform: rotate(2deg);
-  -webkit-transform: rotate(2deg);
-  transform: rotate(2deg);
-  box-shadow: black 5px 5px 5px;
-}
 .floatcircright
 {
-float: right;
-margin: 0 0 10px 10px;
-border: 1px solid #666;
-border-radius: 50%;
-padding: 2px;
+    float: right;
+    margin: 0 0 10px 10px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    padding: 2px;
 }
 .circular
 {
-margin: 0 0 10px 10px;
-border: 1px solid #666;
-border-radius: 50%;
-padding: 2px;
+    margin: 0 0 10px 10px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    padding: 2px;
 }
 .floatright
 {
-float: right;
-margin: 0 0 10px 10px;
-border: 1px solid #666;
-border-radius: 10px;
-padding: 2px;
+    float: right;
+    margin: 0 0 10px 10px;
+    border: 1px solid #666;
+    border-radius: 10px;
+    padding: 2px;
+    text-decoration: none;
+    box-shadow:
+        .1em -.1em 0 .1em rgba(0, 0, 0, .2),
+        inset 0 0 0 .15em rgba(0, 0, 0, .4),
+        -.1em .1em 0 .1em rgba(0, 0, 0, .2)
 }
 .floatleft
 {
-float: left;
-margin: 0px 20px 0 0;
-border: 1px solid #666;
-border-radius:10px;
-padding: 2px;
+    float: left;
+    margin: 0px 20px 0 0;
+    border: 1px solid #666;
+    border-radius:10px;
+    padding: 2px;
+}
+.button
+{
+    font-family: 'AmalgamationRegular';
+    margin: 0 0 10px 10px;
+    border: 1px solid #666;
+    border-radius: 10px;
+    padding: 2px;
+    position: absolute;
+    text-decoration: none;
+    color: blue;
+    box-shadow:
+        .1em -.1em 0 .1em rgba(10, 0, 0, .8),
+        inset 0 0 0 .1em rgba(0, 0, 0, .4),
+        -.1em .1em 0 .1em rgba(0, 0, 0, .2)
 }

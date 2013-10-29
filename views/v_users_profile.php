@@ -10,10 +10,14 @@
 
 <?php if ($user->avatarUrl) : ?>
     <img class="circular" src="/uploads/avatars/<?=$user->avatarUrl?>" 
-                alt="" width="80" height="80">
+                alt="" width="60" height="60">
 <? endif; ?> 
 <form method='POST' action='/users/p_profile' enctype="multipart/form-data">
-    <input type="file" name="file"> <br>
+    <span class="error"><?php if (isset($error)) {echo '* Invalid File Format: Please Enter a Valid file(.jpg, etc).';}?> </span>
+    <br>
+    <input type="file" name="file" style="width: 90px" 
+                        onchange="this.style.width = '100%';" />
+    <br> <br>                   
     <input type="submit" name="submit" 
            style="background-color: green; color: #ffffff;">
 </form>           
