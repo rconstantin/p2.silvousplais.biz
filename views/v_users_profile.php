@@ -13,7 +13,7 @@
                 alt="" width="60" height="60">
 <? endif; ?> 
 <form method='POST' action='/users/p_profile' enctype="multipart/form-data">
-    <span class="error"><?php if (isset($error)) {echo '* Invalid File Format: Please Enter a Valid file(.jpg, etc).';}?> </span>
+    <span class="error"><?php if (isset($error)) {echo '* Invalid File Format: Please Enter a Valid file(.jpg, png, svg, etc).';}?> </span>
     <br>
     <input type="file" name="file" style="width: 90px" 
                         onchange="this.style.width = '100%';" />

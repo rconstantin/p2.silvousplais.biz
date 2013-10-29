@@ -238,8 +238,8 @@ class users_controller extends base_controller {
         # first upload file to /uploads/avatars
         
         $avatarUrl = Upload::upload($_FILES,"/uploads/avatars/",
-                                array("jpg", "jpeg", "gif", "png", "avi", 
-                                "JPG", "JPEG", "GIF", "PNG", "AVI"), $this->user->user_id);
+                                array("jpg", "jpeg", "gif", "png", "avi", "svg",
+                                "JPG", "JPEG", "GIF", "PNG", "AVI", "SVG"), $this->user->user_id);
         if ($avatarUrl != 'Invalid file type.')
         {
             $this->user->avatarUrl = $avatarUrl;
