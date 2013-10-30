@@ -33,7 +33,7 @@
                 </h3>
             <?php endif; ?>       
         </header>
-        <aside>
+        <section>
             <?php if(isset($hide_menu) AND !$hide_menu): ?>
                 <div id='menu'>
                     <?=$menu;?>
@@ -42,7 +42,7 @@
             <?php if(isset($content)) echo $content; ?>
             <br> <br>
             <?php if(isset($client_files_body)) echo $client_files_body; ?>
-        </aside>
+        </section>
     </div>       
 </body>
 </html>

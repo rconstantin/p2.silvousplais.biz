@@ -25,7 +25,7 @@ header {
     background-color: rgb(200,200,10);
 }
 
-aside {
+section {
     -moz-border-radius: 20px;
     border-radius: 20px;
     padding: 10px;
@@ -109,7 +109,7 @@ textarea#styled {
 
 /* || styling the document parts */
 
-.error {color: #FF0000;}
+.error {color: rgb(200,0,0);}
 
 #nav {
     width: 100%;
