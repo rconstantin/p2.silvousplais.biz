@@ -18,7 +18,6 @@ body {
 
 /*  ||  headings */
 header {
-    -moz-border-radius: 20px;
     border-radius: 20px;
     padding: 1px 10px 10px 10px;
     margin: 10px;
@@ -26,7 +25,6 @@ header {
 }
 
 section {
-    -moz-border-radius: 20px;
     border-radius: 20px;
     padding: 10px;
     margin: 10px;
@@ -56,7 +54,7 @@ h4 {
 
 p {
     font-family: 'AmalgamationRegular';
-    color: #069;  /*color: rgb(200,0,0);*/
+    color: #069;
     text-shadow: 1px 1px 1px #000000;
 }
 
