@@ -12,5 +12,4 @@
             </time>
         </p1>  
     </h4>
-
-<? endforeach; ?>      
+<? endforeach; ?>

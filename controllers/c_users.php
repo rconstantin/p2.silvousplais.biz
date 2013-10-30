@@ -13,6 +13,9 @@ class users_controller extends base_controller {
 
     public function __construct() {
         parent::__construct();
+                # add Menu
+        $this->template->hide_menu = FALSE;
+        $this->template->menu = View::instance('v_menu');
     } 
 
     public function index() {
@@ -31,9 +34,6 @@ class users_controller extends base_controller {
         #load JS 
         $client_files_head = Array("/js/jquery-2.0.0.js", "/js/jstz-1.0.4.min.js");
         $this->template->client_files_head = Utils::load_client_files($client_files_head);
-        # add Menu
-        $this->template->hide_menu = FALSE;
-        $this->template->menu = View::instance('v_menu');
 
         # Render template
         echo $this->template;
@@ -122,9 +122,7 @@ class users_controller extends base_controller {
         $this->template->content = View::instance('v_users_login');
         $this->template->content->email = $email;
         $this->template->content->error = $error;
-        # add Menu
-        $this->template->hide_menu = FALSE;
-        $this->template->menu = View::instance('v_menu');
+
         # Render template
         echo $this->template;
     }
@@ -189,9 +187,7 @@ class users_controller extends base_controller {
         $data['last_login'] = $last_login;
         $where_cond = "WHERE token = '".$token."'";
         DB::instance(DB_NAME)->Update_row('users',$data, $where_cond);
-        # add Menu
-        $this->template->hide_menu = FALSE;
-        $this->template->menu = View::instance('v_menu');
+ 
     }
 
     public function logout() {
@@ -226,10 +222,6 @@ class users_controller extends base_controller {
       
         # Pass information to the view specific content
         $this->template->title = "Profile of ".$this->user->first_name;
-
-        # add Menu
-        $this->template->hide_menu = FALSE;
-        $this->template->menu = View::instance('v_menu');
 
         # Render View
         echo $this->template;

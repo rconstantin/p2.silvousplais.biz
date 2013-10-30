@@ -23,7 +23,6 @@ class index_controller extends base_controller {
         # add Menu if user already logged in (taking advantage of the global $this->user)
         $this->template->hide_menu = FALSE;
         $this->template->menu = View::instance('v_menu');
-    
 		# CSS/JS includes
 			/*
 			$client_files_head = Array("");

@@ -10,9 +10,9 @@ class posts_controller extends base_controller {
         if(!$this->user) {
             die("Members only. <a href='/users/login'>Login</a>");
         }
+        # instance of menus visible for all posts methods
         $this->template->hide_menu = FALSE;
         $this->template->menu = View::instance('v_menu');
-
 
     }
 

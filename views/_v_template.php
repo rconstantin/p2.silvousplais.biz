@@ -20,15 +20,18 @@
                 <?php if((!$user) OR (!$user->avatarUrl)): ?>
                     <img class="floatright" src="/uploads/avatars/busytown.jpg" alt="" width="100" height="100">
                 <?php else : ?>
-                     <img class="floatcircright" src="/uploads/avatars/<?=$user->avatarUrl?>" alt="" width="100" height="100">
+                     <img class="floatcircright" src="/uploads/avatars/<?=$user->avatarUrl?>" alt="" width="80" height="80">
                 <?php endif; ?>   
-                A day in the life of the amazing BusyTown enhabitants 
+                A peek into the life of the amazing BusyTown enhabitants 
             </h1>
             <?php if (!$user): ?>
                 <h2 id="tagline" > Come Join Huckle, Lowly and Sally to name a few </h2>
             <?php else: ?>
-                <h2 id="tagline" > <?=$user->first_name?> is logged in </h2>
-             <?php endif; ?>       
+                <h3> Welcome <?=$user->first_name?>,
+                    <a href='/users/profile'>[Profile]</a>
+                    <a href='/users/logout'>[Logout]</a>
+                </h3>
+            <?php endif; ?>       
         </header>
         <aside>
             <?php if(isset($hide_menu) AND !$hide_menu): ?>

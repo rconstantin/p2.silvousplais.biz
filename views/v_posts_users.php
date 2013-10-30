@@ -1,7 +1,12 @@
-<h4> 
-    <? foreach($users as $user): ?>
-        <!-- Print this user's name -->
-        <?=$user['first_name']?> <?=$user['last_name']?>
+<? foreach($users as $user): ?>
+    <!-- Print this user's name -->
+    <h4>
+        <?=$user['first_name']?> <?=$user['last_name']?> <br>
+        <?php if(isset($user['avatarUrl'])): ?>
+            <img class="circular" src="/uploads/avatars/<?=$user['avatarUrl']?>" 
+                alt="" width="80" height="80">
+        <?php endif; ?> 
+        <br>
         <? if(isset($connections[$user['user_id']])): ?>
             <a class="button" href='/posts/unfollow/<?=$user['user_id']?>'>Unfollow</a>
 
@@ -11,5 +16,6 @@
         <? endif; ?>  
     
         <br> <br>
-    <? endforeach; ?>   
-</h4>    
+    </h4>    
+<? endforeach; ?>   
+ 

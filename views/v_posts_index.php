@@ -23,14 +23,14 @@
             <? endif; ?> 
         </p1> 
         <br>
-        <p1> Post Created on: 
+        <p3>Created on: 
             <time datetime="<?=Time::display($post['created'],'Y-m-d G:i',$post['timezone'])?>">
                 <?=Time::display($post['created'],'',$post['timezone'])?>
             </time>
         </p1>
         <?php if($post['created'] != $post['modified']): ?>
             <br>
-            <p1> Post Last Modified on: 
+            <p3>Last Modified on: 
                 <time datetime="<?=Time::display($post['modified'],'Y-m-d G:i',$post['timezone'])?>">
                     <?=Time::display($post['modified'],'',$post['timezone'])?>
                 </time>
