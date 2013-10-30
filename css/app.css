@@ -56,13 +56,13 @@ h4 {
 
 p {
     font-family: 'AmalgamationRegular';
-    color: rgb(200,0,0);
+    color: #069;  /*color: rgb(200,0,0);*/
     text-shadow: 1px 1px 1px #000000;
 }
 
 p1 {
     font-family: 'AmalgamationRegular';
-    color: #069;;
+    color: #069;
     text-shadow: 1px 1px 1px #000000;
 }
 
