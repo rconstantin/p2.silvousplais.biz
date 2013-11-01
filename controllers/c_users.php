@@ -104,7 +104,7 @@ class users_controller extends base_controller {
             $_POST['created'] = Time::now();
             $_POST['modified'] = Time::now();
             # default AvatarUrl to streamline code and avoid extra checking down the road
-            $_POST['avatarUrl'] = 'busytown3.jpeg';
+            $_POST['avatarUrl'] = DEFAULT_AVATAR_URL;
 
             #Encrypt Password
             $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
@@ -253,8 +253,18 @@ class users_controller extends base_controller {
                                 "JPG", "JPEG", "GIF", "PNG", "AVI", "SVG"), $this->user->user_id);
         if ($avatarUrl != 'Invalid file type.')
         {
+            # remove old avatarUrl if name is different... no point in keeping in upload dit
+            $oldAvatarUrl = $this->user->avatarUrl;
             $this->user->avatarUrl = $avatarUrl;
-  
+            
+            if(($oldAvatarUrl != $avatarUrl) AND ($oldAvatarUrl != DEFAULT_AVATAR_URL))
+            {
+                $old = getcwd(); // Save the current directory
+                $tmp = $old.'/uploads/avatars';
+                chdir($tmp);
+                unlink($oldAvatarUrl);
+                chdir($old); // Restore the old working directory    
+            }
             # update avatarUrl in the database
             $data = Array("avatarUrl"=>$this->user->avatarUrl);
             $where_clause = "WHERE user_id = '".$this->user->user_id."'";
