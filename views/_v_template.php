@@ -22,7 +22,7 @@
                 <?php else : ?>
                      <img class="floatcircright" src="/uploads/avatars/<?=$user->avatarUrl?>" alt="" width="80" height="80">
                 <?php endif; ?>   
-                A peek into the life of the amazing BusyTown enhabitants 
+                A peek into the life of the mysterious BusyTown enhabitants 
             </h1>
             <?php if (!$user): ?>
                 <h2 id="tagline" > Come Join Huckle, Lowly and Sally to name a few </h2>

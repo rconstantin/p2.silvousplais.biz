@@ -87,7 +87,7 @@ a {
 
 /* Setting text area size and style */
 textarea#styled {
-    width: 600px;
+    width: 500px;
     height: 120px;
     border: 3px solid #cccccc;
     padding: 5px;
@@ -148,7 +148,7 @@ textarea#styled {
 .floatcircright
 {
     float: right;
-    margin: 0 0 10px 10px;
+    margin: -10px 10px 10px 10px;
     border: 1px solid #666;
     border-radius: 50%;
     padding: 2px;
@@ -163,10 +163,10 @@ textarea#styled {
 .floatright
 {
     float: right;
-    margin: 0 0 10px 10px;
+    margin: -5px 10px 10px 10px;
     border: 1px solid #666;
     border-radius: 10px;
-    padding: 2px;
+    padding: 4px;
     text-decoration: none;
     box-shadow:
         .1em -.1em 0 .1em rgba(0, 0, 0, .2),

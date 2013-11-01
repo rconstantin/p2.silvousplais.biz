@@ -8,7 +8,8 @@ class posts_controller extends base_controller {
 
         # Make sure user is logged in if they want to use anything in this controller
         if(!$this->user) {
-            die("Members only. <a href='/users/login'>Login</a>");
+            # die("Members only. <a href='/users/login'> Login </a>");
+            Router::redirect("/");
         }
         # instance of menus visible for all posts methods
         $this->template->hide_menu = FALSE;
@@ -89,8 +90,8 @@ class posts_controller extends base_controller {
         # Set up the View
         $this->template->content = View::instance("v_posts_users");
         $this->template->title = "Users";
-
-        $q = "SELECT * FROM users";
+        # query list of users excluding the current logged in user (always followed by self)... 
+        $q = "SELECT * FROM users WHERE users.user_id !=".$this->user->user_id;
 
         $users = DB::instance(DB_NAME)->select_rows($q);
 
@@ -102,7 +103,7 @@ class posts_controller extends base_controller {
         # use select_array APi with user_id_followed as index
         # to facilitate view display code
         $connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
-        
+
         # Pass data to the view
         $this->template->content->users = $users;
         $this->template->content->connections = $connections;
@@ -176,7 +177,7 @@ class posts_controller extends base_controller {
         # Set up the View
         $this->template->content = View::instance("v_posts_followers");
         $this->template->title = "Followers";
-        # prepare statement to include followers info
+        # prepare statement to include followers info (excluding self from the list)
         $q = "SELECT 
                 users.first_name,
                 users.last_name,
@@ -187,7 +188,7 @@ class posts_controller extends base_controller {
                 FROM users
                 INNER JOIN users_users
                 ON users.user_id = users_users.user_id
-                WHERE users_users.user_id_followed = ".$this->user->user_id;
+                WHERE users_users.user_id != users_users.user_id_followed AND users_users.user_id_followed = ".$this->user->user_id;
       
         $followers = DB::instance(DB_NAME)->select_array($q,'follower_id');
         

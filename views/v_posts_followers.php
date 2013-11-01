@@ -1,3 +1,8 @@
+<!-- check if no posts are active for this user -->
+<?php if(count($followers) == 0): ?>
+    <h4> Sorry <?=$user->first_name?>, You have no followers at this time. </h4>
+    <h4> Go out and spread the mystery and others will follow. </h4>
+<?php endif; ?>    
 <? foreach($followers as $follower): ?>
     <!-- Print this user's name -->
     <h4> 

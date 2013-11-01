@@ -42,7 +42,8 @@ class users_controller extends base_controller {
     public function p_signup() {
         # Validate that all required signup fields are not empty
         # for simplicity of logic and to use single error code - set
-        # error to first missing field.
+        # error to missing field.
+        
         $error = '';
         if (empty($_POST['first_name'])) 
         {
@@ -84,6 +85,7 @@ class users_controller extends base_controller {
           
             if (count($result) > 0) {
                 $error = 'InvalidEmail';
+                $_POST['email'] = '';
             }
         }
         
@@ -101,6 +103,8 @@ class users_controller extends base_controller {
             # insert time (timestamp) of creation and last modify with user
             $_POST['created'] = Time::now();
             $_POST['modified'] = Time::now();
+            # default AvatarUrl to streamline code and avoid extra checking down the road
+            $_POST['avatarUrl'] = 'busytown3.jpeg';
 
             #Encrypt Password
             $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
@@ -108,7 +112,14 @@ class users_controller extends base_controller {
             $_POST['token'] = sha1(TOKEN_SALT.$_POST['email']).Utils::generate_random_string();
             # insert row into DB
             $user_id = DB::instance(DB_NAME)->insert('users', $_POST);
+            # insert a row in users_users table for always following self
+            $data = Array (
+            "created" => Time::now(),
+            "user_id" => $user_id,
+            "user_id_followed" => $user_id);
 
+            # insert array into users_users table
+            DB::instance(DB_NAME)->insert('users_users', $data);
             # redirect to anchor page
             # Router::redirect("/");
             # +Feature: redirect to profile page not requiring additional step to login
@@ -222,13 +233,21 @@ class users_controller extends base_controller {
       
         # Pass information to the view specific content
         $this->template->title = "Profile of ".$this->user->first_name;
-
+        $stats = $this->p_user_stats();
+        $this->template->content->stats = $stats;
         # Render View
         echo $this->template;
     }
     public function p_profile() {
+        # case someone submits with no file chosen. This should be protected 
+        # against in the Upload class.. but it is not. so will do it here
+        #  ini_get('upload_max_filesize') in Mbytes
+        if(($_FILES['file']['name'] == '') OR ($_FILES['file']['size'] > 1000000*ini_get('upload_max_filesize')))
+        {
+            $error = 'InvalidFileType';
+            Router::redirect("/users/profile/$error");
+        }
         # first upload file to /uploads/avatars
-        
         $avatarUrl = Upload::upload($_FILES,"/uploads/avatars/",
                                 array("jpg", "jpeg", "gif", "png", "avi", "svg",
                                 "JPG", "JPEG", "GIF", "PNG", "AVI", "SVG"), $this->user->user_id);
@@ -248,6 +267,20 @@ class users_controller extends base_controller {
         # Send them back to the main index.
         Router::redirect("/");
 
+    }
+    public function p_user_stats() {
+        # get number of members this logged in user is following (-1 to exclude self)
+        $q = "SELECT COUNT(*) FROM users_users WHERE users_users.user_id = ".$this->user->user_id;
+        $numFollowing = DB::instance(DB_NAME)->select_field($q) - 1;
+
+        $q = "SELECT COUNT(*) FROM users_users WHERE users_users.user_id_followed = ".$this->user->user_id;
+        $numFollowers = DB::instance(DB_NAME)->select_field($q) - 1;
+  
+        $q = "SELECT COUNT(*) FROM posts WHERE posts.user_id = ".$this->user->user_id;
+        $numPosts = DB::instance(DB_NAME)->select_field($q);
+
+        return (array("followings"=>$numFollowing, "followers"=>$numFollowers, 
+                      "posts"=>$numPosts));
     }
 } # end of the class
 ?>
