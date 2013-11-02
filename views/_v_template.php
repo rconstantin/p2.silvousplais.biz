@@ -30,6 +30,7 @@
                 <h3> Welcome <?=$user->first_name?>,
                     <a href='/users/profile'>[Profile]</a>
                     <a href='/users/logout'>[Logout]</a>
+                    <a href='/users/unsubscribe'>[Unsubscribe]</a>
                 </h3>
             <?php endif; ?>       
         </header>

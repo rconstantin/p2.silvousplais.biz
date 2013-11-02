@@ -345,5 +345,52 @@ class users_controller extends base_controller {
         return (array("followings"=>$numFollowing, "followers"=>$numFollowers, 
                       "posts"=>$numPosts));
     }
+    # following function will remove current user from APP site
+    public function unsubscribe($error = NULL) {
+       # Setup View
+        $this->template->title = "unsubscribe";
+        $this->template->content = View::instance('v_users_unsubscribe');
+        $this->template->content->error = $error;
+        # Render template
+        echo $this->template;
+    }
+    public function p_unsubscribe() {
+        $error = '';
+        if ($_POST['password'] != $_POST['conf_password']) {
+            $error = 'InvalidPassword';
+        }
+        else {
+            # Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+            $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+            # Hash submitted password so we can compare it against one in the db
+            $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+
+            # Search the db for this email and password
+            # Retrieve the token if it's available
+            $q = "SELECT token 
+                FROM users 
+                WHERE email = '".$this->user->email."' 
+                AND password = '".$_POST['password']."'";
+
+            $token = DB::instance(DB_NAME)->select_field($q);
+            if (!$token) {
+                $error = 'InvalidPassword';
+            }
+            else {
+                # all checks passed, now cleanup the DB from this user
+                # only need to delete the user and rely on the FK cascade
+                # to delete the posts and connection to other users (users_users)
+                $w = 'WHERE user_id = '.$this->user->user_id;
+                DB::instance(DB_NAME)->delete('users', $w);
+            }
+        }
+        if ($error != '') {
+            Router::redirect("/users/unsubscribe/$error");
+        }
+        else {
+            Router::redirect("/");
+        }
+    }
 } # end of the class
 ?>

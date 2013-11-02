@@ -11,7 +11,8 @@
 <br>
 <p> +1 Feature: successful Signup will redirect new member to Profile Page.<br>
     +1 Feature: upload URL Avatar in Profile page and display Blog statistics.<br> 
-    +1 Feature: Update/Delete Blog Posts.
-    +1 Feature: email confirmation upon signup
+    +1 Feature: Update/Delete Blog Posts.<br> 
+    +1 Feature: email confirmation upon signup.<br> 
+    +1 Feature: unsubscribe (delete) a user.<br> 
 </p>
 
