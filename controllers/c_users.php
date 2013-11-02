@@ -80,26 +80,33 @@ class users_controller extends base_controller {
            # $result = DB::instance(DB_NAME)->queryCount($q);
            # $q = "SELECT COUNT(*) FROM users WHERE email = '".$_POST['email']."'";
 
-            $q = "SELECT * FROM users WHERE email = '".$_POST['email']."'";
-            $result = DB::instance(DB_NAME)->select_row($q);
+            $q = "SELECT COUNT(*) FROM users WHERE email = '".$_POST['email']."'";
+            $result = DB::instance(DB_NAME)->select_field($q);
           
-            if (count($result) > 0) {
+            if ($result > 0) {
                 $error = 'InvalidEmail';
                 $_POST['email'] = '';
             }
         }
         
-        # Insert this user into the database - More error checking to follow
-   
+        # prepare signup params to pass back
+        $lastName = $_POST['last_name'];
+        $firstName = $_POST['first_name'];
+        $email = $_POST['email'];
         if ($error != '') {
-            $lastName = $_POST['last_name'];
-            $firstName = $_POST['first_name'];
-            $email = $_POST['email'];
-       
             # send back to signup page
             Router::redirect("/users/signup/$firstName/$lastName/$email/$error");
         }
         else {
+            # validate email domain and if valid send signup email
+            $result = $this->p_signup_email();
+            if ($result == false) {
+                # reset email sent back to signup 
+                $error = 'InvalidEmail';
+                $email = '';
+                # send back to signup page
+                Router::redirect("/users/signup/$firstName/$lastName/$email/$error");
+            }
             # insert time (timestamp) of creation and last modify with user
             $_POST['created'] = Time::now();
             $_POST['modified'] = Time::now();
@@ -112,6 +119,7 @@ class users_controller extends base_controller {
             $_POST['token'] = sha1(TOKEN_SALT.$_POST['email']).Utils::generate_random_string();
             # insert row into DB
             $user_id = DB::instance(DB_NAME)->insert('users', $_POST);
+
             # insert a row in users_users table for always following self
             $data = Array (
             "created" => Time::now(),
@@ -124,9 +132,54 @@ class users_controller extends base_controller {
             # Router::redirect("/");
             # +Feature: redirect to profile page not requiring additional step to login
             $this->p_common_login($_POST['token']);
+
+            # redirect new user to profile page
             Router::redirect("/users/profile");
         }
     }
+    public function p_signup_email()
+    {
+        # the email to validate
+        $email = $_POST['email'];
+        # an optional sender
+        $sender = APP_EMAIL;
+        # validate that the domain in email is a valid... if so, most likely email is good
+        $domain = explode( "@", $email ); # get the domain name
+        if (!(@fsockopen ($domain[1],80,$errno,$errstr,3)))
+        {
+            # if the connection can be established, the email address is probably valid
+            return false;
+        } 
+ 
+        # Build a multi-dimension array of recipients of this email
+        $name = $_POST['first_name'] . " " . $_POST['last_name'];
+
+        $to[] = Array("name" => $name, "email" => $_POST['email']);
+
+        # Build a single-dimension array of who this email is coming from
+        # note it's using the constants we set in the configuration file)
+        $from = Array("name" => APP_NAME, "email" => APP_EMAIL);
+
+        # Subject
+        $subject = "Welcome to " . APP_NAME;
+
+        # You can set the body as just a string of text
+        $body = "Hi " . $name .", this is just a message to confirm your registration at " . APP_NAME;
+
+        # placeholders for now.
+        $cc  = "";
+        $bcc = "";
+
+        # With everything set, send the email
+        $email = Email::send($to, $from, $subject, $body, true, $cc, $bcc);
+        if ($email == false)
+        {
+            # die("Invalid Email Address. <a href='/users/signup'> Sign up </a>");
+            return false;
+        }
+        return true;
+    }
+
     public function login($email = NULL, $error = NULL) {
         # Setup View
         $this->template->title = "Login";
@@ -249,8 +302,8 @@ class users_controller extends base_controller {
         }
         # first upload file to /uploads/avatars
         $avatarUrl = Upload::upload($_FILES,"/uploads/avatars/",
-                                array("jpg", "jpeg", "gif", "png", "avi", "svg",
-                                "JPG", "JPEG", "GIF", "PNG", "AVI", "SVG"), $this->user->user_id);
+                                array("jpg", "jpeg", "gif", "png", "avi", "svg", "psd",
+                                "JPG", "JPEG", "GIF", "PNG", "AVI", "SVG","PSD"), $this->user->user_id);
         if ($avatarUrl != 'Invalid file type.')
         {
             # remove old avatarUrl if name is different... no point in keeping in upload dit
