@@ -14,20 +14,20 @@ class index_controller extends base_controller {
 	-------------------------------------------------------------------------------------------------*/
 	public function index() {
 		
-		# Any method that loads a view will commonly start with this
-		# First, set the content of the template with a view file
-		$this->template->content = View::instance('v_index_index');
+        # Any method that loads a view will commonly start with this
+        # First, set the content of the template with a view file
+        $this->template->content = View::instance('v_index_index');
 			
-		# Now set the <title> tag
-		$this->template->title = "Home of ".APP_NAME;
+        # Now set the <title> tag
+        $this->template->title = "Home of ".APP_NAME;
         # add Menu if user already logged in (taking advantage of the global $this->user)
         $this->template->hide_menu = FALSE;
         $this->template->menu = View::instance('v_menu');
 		
-		# Render the view
-		echo $this->template;
+        # Render the view
+        echo $this->template;
 	 
-	} # End of method
+    } # End of method
 	
 	
 } # End of class
