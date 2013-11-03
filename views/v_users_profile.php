@@ -1,12 +1,14 @@
    
 <h1>This is <?=$user->first_name?> <?=$user->last_name?>'s  profile:</h1>
 
-<p1> Email: <?= $user->email ?> <br /> <br /> </p1>
-<p1> Member Since: <?php $mem = Time::Display($user->created,'',$user->timezone); echo $mem; ?> <br /> <br /> </p1>
-<p1> Number of Followers: <?=$stats['followers']?> <br /> <br /> </p1>
-<p1> Number of Members <?= $user->first_name ?> is following: <?=$stats['followings']?>  <br /> <br /> </p1>
-<p1> Number of Active Posts by <?= $user->first_name ?>: <?=$stats['posts']?>  <br /> <br /> </p1>
-<p> Upload/Change your Personal Avatar<p> 
+<p> Email: <?= $user->email ?> <br>
+    Member Since: <?php $mem = Time::Display($user->created,'',$user->timezone); echo $mem; ?> <br>
+    Number of Followers: <?=$stats['followers']?> <br>
+    Number of Members <?= $user->first_name ?> is following: <?=$stats['followings']?>  <br>
+    Number of Active Posts by <?= $user->first_name ?>: <?=$stats['posts']?>  <br>
+</p>
+
+<p1> Upload/Change your Personal Avatar:<p1> <br><br>
 
 <?php if ($user->avatarUrl) : ?>
     <img class="circular" src="/uploads/avatars/<?=$user->avatarUrl?>" 

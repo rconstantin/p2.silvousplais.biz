@@ -54,13 +54,13 @@ h4 {
 
 p {
     font-family: 'AmalgamationRegular';
-    color: #069;
-    text-shadow: 1px 1px 1px #000000;
+    color: black;
+    text-shadow: 0.5px 0px 0px #000000;
 }
 
 p1 {
     font-family: 'AmalgamationRegular';
-    color: #069;
+    color: green;
     text-shadow: 1px 1px 1px #000000;
 }
 
@@ -78,7 +78,7 @@ p3 {
     text-shadow: 1px 1px 1px #000000;
 }
 a {
-    color: #069;
+    color: green;
     text-decoration: none;
 }
 #tagline {
@@ -125,7 +125,7 @@ textarea#styled {
     padding: 8px 15px;
     text-decoration: none;
     font-weight: bold;
-    color: #069;
+    color: green;
     border-right: 1px solid #ccc; 
     cursor:pointer;
     background:rgba(255, 255, 255, .8);
