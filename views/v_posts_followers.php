@@ -12,9 +12,7 @@
                 alt="" width="80" height="80">
         <?php endif; ?> <br>
         <mark class=green> Follower Since: 
-            <time datetime="<?=Time::display($follower['follower_since'],'Y-m-d G:i',$follower['timezone'])?>">
-                <?=Time::display($follower['follower_since'],'',$follower['timezone'])?>
-            </time>
+            <?=Time::display($follower['follower_since'],'',$follower['timezone'])?>
          </mark>   
          <br><br>
     <? endforeach; ?>

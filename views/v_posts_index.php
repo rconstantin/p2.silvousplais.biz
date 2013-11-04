@@ -29,21 +29,18 @@
                 <a class='floatright' href='/posts/modify/<?=$post['post_id']?>'>Modify Post</a>
             <? endif; ?> 
             <?=$post['content']?>
-        </p> 
-        
-        <p3>Created on: 
-            <time datetime="<?=Time::display($post['created'],'Y-m-d G:i',$post['timezone'])?>">
-                <?=Time::display($post['created'],'',$post['timezone'])?>
-            </time>
-        </p1>
-        <?php if($post['created'] != $post['modified']): ?>
             <br>
-            <p3>Last Modified on: 
-                <time datetime="<?=Time::display($post['modified'],'Y-m-d G:i',$post['timezone'])?>">
+        
+            <mark class="green">Created on: 
+                <?=Time::display($post['created'],'',$post['timezone'])?>
+            </mark>
+            <?php if($post['created'] != $post['modified']): ?>
+                <br>
+                <mark class="green">Last Modified on: 
                     <?=Time::display($post['modified'],'',$post['timezone'])?>
-                </time>
-            </p1>
-        <?php endif; ?>    
+                </mark>
+            <?php endif; ?>   
+        </p> 
     </aside>        
 </article>
 <?php endforeach; ?>

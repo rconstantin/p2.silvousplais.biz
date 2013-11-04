@@ -78,8 +78,11 @@ p3 {
     text-shadow: 1px 1px 1px #000000;
 }
 mark.green {
+    font-family: 'AmalgamationRegular';
     color:green;
     background: none;
+    font-style: italic;
+    text-shadow: 1px 0.5px 0.5px #000000;
 }
 
 a {
@@ -172,6 +175,7 @@ textarea#styled {
     border: 1px solid #666;
     border-radius: 10px;
     padding: 4px;
+    text-shadow: 1px 0.5px 0.5px #000000;
     text-decoration: none;
 }
 .floatleft
