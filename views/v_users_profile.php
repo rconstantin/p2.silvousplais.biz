@@ -8,7 +8,7 @@
     Number of Active Posts by <?= $user->first_name ?>: <?=$stats['posts']?>  <br>
 </p>
 
-<p1> Upload/Change your Personal Avatar:<p1> <br><br>
+<mark class="green"> Upload/Change your Personal Avatar:</mark> <br><br>
 
 <?php if ($user->avatarUrl) : ?>
     <img class="circular" src="/uploads/avatars/<?=$user->avatarUrl?>" 
