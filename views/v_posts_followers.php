@@ -2,19 +2,20 @@
 <?php if(count($followers) == 0): ?>
     <h4> Sorry <?=$user->first_name?>, You have no followers at this time. </h4>
     <h4> Go out and spread the mystery and others will follow. </h4>
-<?php endif; ?>    
-<? foreach($followers as $follower): ?>
-    <!-- Print this user's name -->
-    <h4> 
+<?php endif; ?>   
+<h4>  
+    <? foreach($followers as $follower): ?>
+        <!-- Print this user's name -->
         <?=$follower['first_name']?> <?=$follower['last_name']?> <br>
         <?php if(isset($follower['avatarUrl'])): ?>
             <img class="circular" src="/uploads/avatars/<?=$follower['avatarUrl']?>" 
                 alt="" width="80" height="80">
         <?php endif; ?> <br>
-        <p1> Follower Since: 
+        <mark class=green> Follower Since: 
             <time datetime="<?=Time::display($follower['follower_since'],'Y-m-d G:i',$follower['timezone'])?>">
                 <?=Time::display($follower['follower_since'],'',$follower['timezone'])?>
             </time>
-        </p1>  
-    </h4>
-<? endforeach; ?>
+         </mark>   
+         <br><br>
+    <? endforeach; ?>
+</h4>

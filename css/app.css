@@ -77,6 +77,11 @@ p3 {
     font-style: italic;
     text-shadow: 1px 1px 1px #000000;
 }
+mark.green {
+    color:green;
+    background: none;
+}
+
 a {
     color: green;
     text-decoration: none;
