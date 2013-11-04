@@ -94,7 +94,7 @@ a {
 }
 
 /* Setting text area size and style */
-textarea#styled {
+textarea#content {
     width: 500px;
     height: 120px;
     border: 3px solid #cccccc;
