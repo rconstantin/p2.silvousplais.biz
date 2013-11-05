@@ -13,7 +13,9 @@ html {
 body {
     margin: 1em;
     padding: 1em;
-    background-image: url(/uploads/avatars/busytown5.jpeg); 
+    /* take out for now to avoid IE < 9 with HTML5 headers and sections
+    ** background-image: url(/uploads/avatars/busytown5.jpeg); */
+    background-color: beige;
 }
 
 /*  ||  headings */
