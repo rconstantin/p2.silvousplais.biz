@@ -1,13 +1,4 @@
 <?php
-# Could move this function to common library but since it is users input specific will keep it
-# here for now
-
-function test_input($data) {
-  $data = trim($data);
-  $data = htmlspecialchars($data);
-  $data = stripslashes($data);
-  return $data;
-}
 
 class users_controller extends base_controller {
 
@@ -50,19 +41,19 @@ class users_controller extends base_controller {
             $error = 'InvalidFirstName';
         }
         else {
-            $_POST['first_name'] = test_input($_POST['first_name']);
+            $_POST['first_name'] = AppUtils::test_input($_POST['first_name']);
         }
         if (empty($_POST['last_name'])) {
             $error = 'InvalidLastName';
         }
         else {
-            $_POST['last_name'] = test_input($_POST['last_name']);
+            $_POST['last_name'] = AppUtils::test_input($_POST['last_name']);
         }
         if (empty($_POST['email'])) {
             $error = 'InvalidEmail';
         }
         else {
-            $_POST['email'] = test_input($_POST['email']);
+            $_POST['email'] = AppUtils::test_input($_POST['email']);
             if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$_POST['email']))
             {
                 $error = "InvalidEmail";
@@ -73,7 +64,9 @@ class users_controller extends base_controller {
         if (empty($_POST['password'])) {
             $error = 'InvalidPassword';
         }
-      
+        else {
+            $_POST['password'] = AppUtils::test_input($_POST['password']);
+        }
         # DB Validation that new user email is not already in use
         if (!$error) {
            # NEED NEW API to return count...  
@@ -200,8 +193,14 @@ class users_controller extends base_controller {
         if (empty($_POST['email'])) {
             $error = 'InvalidEmail';
         }
+        else {
+            $_POST['email'] = AppUtils::test_input($_POST['email']);
+        }
         if (empty($_POST['password'])) {
             $error = 'InvalidPassword';
+        }
+        else {
+            $_POST['password'] = AppUtils::test_input($_POST['password']);
         }
         if ($error!= '')
         {

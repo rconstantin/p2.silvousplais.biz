@@ -17,19 +17,26 @@ class posts_controller extends base_controller {
 
     }
 
-    public function add() {
+    public function add($error = NULL) {
 
         # Setup view
         $this->template->content = View::instance('v_posts_add');
         $this->template->title   = "New Post";
-
+        $this->template->content->error = $error;
         # Render template
         echo $this->template;
 
     }
 
     public function p_add() {
-
+        # validate input
+        $_POST['content'] = AppUtils::test_input($_POST['content']);
+        if (empty($_POST['content'])) {
+            $error = "emptyPost";
+            # redirect user back to add a post since nothing was entered... 
+            Router::redirect("/posts/add/$error");
+        }
+        
         # Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;
 
@@ -147,7 +154,7 @@ class posts_controller extends base_controller {
         Router::redirect("/posts/index");
     }
     # update text of a post
-    public function modify($post_id) {
+    public function modify($post_id, $error = NULL) {
         # query statement
         $q = 'SELECT content FROM posts WHERE post_id =' .$post_id;
         # delete post from DB
@@ -157,10 +164,21 @@ class posts_controller extends base_controller {
         $this->template->title   = "Modify Post";
         $this->template->content->post_text = $post_text;
         $this->template->content->post_id = $post_id;
+        $this->template->content->error = $error;
         # Render template
         echo $this->template;
     }
     public function p_modify($post_id) {
+        # validate that post is not rendered empty
+        $_POST['content'] = AppUtils::test_input($_POST['content']);
+        if (empty($_POST['content']))
+        {
+            $error = "postEmpty";
+            Router::redirect("/posts/modify/$post_id/$error");
+        }
+        
+        # Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
         # build query statement
         $data = Array (
             "modified" => Time::now(),
