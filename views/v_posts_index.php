@@ -11,6 +11,7 @@
     <!-- print owner name and display avatar at top of posts by owner. 
          No need for Avatar if owner is same as logged in user -->         
     <?php if ($post['post_user_id'] != $prev_posts_user_id): ?>
+        <br>
         <?php if($post['post_user_id'] != $user->user_id): ?>
             <!-- Display Name and show Avatar for following member -->
             <h4><?=$post['first_name']?> <?=$post['last_name']?> posted:</h4> 
